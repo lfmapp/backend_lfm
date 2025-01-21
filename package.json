@@ -1,0 +1,17 @@
+{
+  "name": "backend_lfm",
+  "version": "1.0.0",
+  "description": "Backend Node.js pour Looking For Meal, gérant l'authentification, les ingrédients des utilisateurs, et les recettes réalisables.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "backend_lfm": "file:",
+    "express": "^4.21.2"
+  }
+}
