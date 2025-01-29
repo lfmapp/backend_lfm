@@ -5,7 +5,7 @@ const app = express();
 app.get('/', (req: Request, res: Response) => {
     res.json({
         status: 200,
-        message: "LFM BackEnd - Update Test"
+        message: "LFM BackEnd - Test Jenkins"
     });
 });
 
