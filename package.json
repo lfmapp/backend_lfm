@@ -15,7 +15,9 @@
     "@nestjs/core": "^11.0.8",
     "backend_lfm": "file:",
     "express": "^4.21.2",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1",
+    "typescript": "^5.7.3"
   },
   "devDependencies": {
     "@nestjs/testing": "^11.0.8",
