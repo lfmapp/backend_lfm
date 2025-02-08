@@ -45,5 +45,4 @@ describe('🔄 Test d\'intégration API', () => {
     expect(response.body[0]).toHaveProperty('name', 'Test User');
   });
 });
-
  
