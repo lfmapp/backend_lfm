@@ -64,4 +64,5 @@ jobs:
 
       - name: Run OWASP ZAP Scan
         run: |
-          docker run -u zap -p 8080:8080 ghcr.io/zaproxy/zaproxy zap-baseline.py -t http://host.docker.internal:8050/api
+          docker run --network=host -u zap ghcr.io/zaproxy/zaproxy zap-baseline.py -t http://localhost:8050/api
+
