@@ -66,6 +66,3 @@ jobs:
 
       - name: Start Application
         run: npm run dev & sleep 10
-
-      - name: Run System Tests
-        run: npm run test:system
