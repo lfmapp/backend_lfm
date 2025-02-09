@@ -23,7 +23,7 @@ const startServer = async () => {
     app.get('/', (req: Request, res: Response) => {
         res.json({
             status: 200,
-            message: "LFM BackEnd - Tests TI, TU, & TS"
+            message: "LFM BackEnd - Tests TI, TU, & TS & more"
         });
     });
 
