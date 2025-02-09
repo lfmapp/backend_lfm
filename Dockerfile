@@ -1,18 +1,21 @@
-FROM node:18
+# Utilisation de Node.js 20 (fixe le problème de version NestJS)
+FROM node:20
 
-# Create app directory
+# Définition du répertoire de travail
 WORKDIR /usr/src/app
 
-# Install app dependencies
+# Copie et installation des dépendances
 COPY package*.json ./
-RUN npm ci --only=production && npm install --only=dev && npm install jest -g
+RUN npm install --omit=dev  # Installe uniquement les dépendances de production
 
-# Bundle app source
+# Copie du code source de l'application
 COPY . .
 
-# Expose the application port
-ENV PORT=8080
-EXPOSE 8080
+# Installation des dépendances de développement (ex. Jest) et nettoyage
+RUN npm install --only=dev && npm install -g jest && npm cache clean --force
 
-# Start the application
+# Exposition du port de l'application
+EXPOSE 8050
+
+# Commande de lancement de l'application
 CMD ["node", "server.js"]
