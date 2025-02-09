@@ -6,21 +6,63 @@ jobs:
   sast:
     name: Run SAST with ESLint Security
     runs-on: ubuntu-latest
+    env:
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_HOST: "localhost"
+      DB_PORT: "5432"
+
     steps:
       - uses: actions/checkout@v3
+
+      - name: Debug Environment Variables
+        run: |
+          echo "DB_NAME: $DB_NAME"
+          echo "DB_USER: $DB_USER"
+          echo "DB_PASSWORD: ${DB_PASSWORD:0:2}****${DB_PASSWORD: -2}"
+          echo "DB_HOST: $DB_HOST"
+          echo "DB_PORT: $DB_PORT"
+
       - name: Install dependencies
         run: npm install
+
       - name: Run ESLint Security Scan
         run: npx eslint src/
 
   dast:
     name: Run DAST with OWASP ZAP
     runs-on: ubuntu-latest
+    env:
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_HOST: "localhost"
+      DB_PORT: "5432"
+
     steps:
       - uses: actions/checkout@v3
+
+      - name: Debug Environment Variables
+        run: |
+          echo "DB_NAME: $DB_NAME"
+          echo "DB_USER: $DB_USER"
+          echo "DB_PASSWORD: ${DB_PASSWORD:0:2}****${DB_PASSWORD: -2}"
+          echo "DB_HOST: $DB_HOST"
+          echo "DB_PORT: $DB_PORT"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start PostgreSQL
+        run: |
+          sudo systemctl start postgresql
+          sudo systemctl status postgresql
+
       - name: Start Application
         run: npm run dev & sleep 10
+
       - name: Run OWASP ZAP Scan
         run: |
-          docker run -u zap -p 8080:8080 ghcr.io/zaproxy/zaproxy zap-baseline.py -t http://host.docker.internal:8050/api
+          docker run --network=host -u zap ghcr.io/zaproxy/zaproxy zap-baseline.py -t http://localhost:8050/api
 
