@@ -1,0 +1,26 @@
+name: Security Tests
+
+on: [push, pull_request]
+
+jobs:
+  sast:
+    name: Run SAST with ESLint Security
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run ESLint Security Scan
+        run: npx eslint src/
+
+  dast:
+    name: Run DAST with OWASP ZAP
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Start Application
+        run: npm run dev & sleep 10
+      - name: Run OWASP ZAP Scan
+        run: |
+          docker run -u zap -p 8080:8080 ghcr.io/zaproxy/zaproxy zap-baseline.py -t http://host.docker.internal:8050/api
+
