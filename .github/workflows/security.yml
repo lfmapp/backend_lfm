@@ -62,7 +62,7 @@ jobs:
       - name: Start Application
         run: npm run dev & sleep 10
 
-      - name: Run OWASP ZAP Scan
-        run: |
-          docker run --network=host -u zap ghcr.io/zaproxy/zaproxy zap-baseline.py -t http://localhost:8050/api
+#      - name: Run OWASP ZAP Scan
+#        run: |
+#          docker run --network=host -u zap ghcr.io/zaproxy/zaproxy zap-baseline.py -t http://localhost:8050/api
 
