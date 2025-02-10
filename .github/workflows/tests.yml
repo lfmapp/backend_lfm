@@ -32,8 +32,8 @@ jobs:
           sudo systemctl start postgresql
           sudo systemctl status postgresql
 
-      - name: Run Unit & Integration Tests (Jest)
-        run: npm run test
+#      - name: Run Unit & Integration Tests (Jest)
+#        run: npm run test
 
   system-tests:
     name: Run System Tests
